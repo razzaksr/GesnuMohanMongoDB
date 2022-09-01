@@ -1,0 +1,78 @@
+Atlas atlas-hp69qc-shard-0 [primary] forenoon>show dbs
+forenoon   40.00 KiB
+admin     336.00 KiB
+local       1.27 GiB
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon>use forenoon
+switched to db forenoon
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> show collections
+first
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find()
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().pretty()
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.insert({"expertName":'Manoj Kumar',"technology":'Java',"experience":1,skills:{"frontend":'material ui',"backend":"spring boot"},"location":"namakkal"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("631039a21b1281b079eba296") }
+}
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().pretty()
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.insertOne({"expertName":'Aarthi',"technology":'Python',"experience":3,skills:{"frontend":'react',"backend":"django"},"location":"sivathapuram"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("63103c121b1281b079eba297")
+}
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon>db.first.insertMany([{"expertName":"Razak Mohamed","technology":"Java","experience":10,"skills":{"frontend":"react","backend":['spring','django','flask','express']},"location":"salem"},{"expertName":"Rasheedha","technology":"digital marketting","experience":9,"skills":"SEO","location":"salem"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("63103df01b1281b079eba298"),
+    '1': ObjectId("63103df01b1281b079eba299")
+  }
+}
+
+insertOne({"key":"value","key":{"key":value,"key:"value"},"key":value})
+
+insertMany([{json},{json},{json}])
+
+bulkWrite([{insertOne:{json}},{insertOne:{json}}])
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.bulkWrite([{insertOne:{"expertName":'Maheshwaran',"technology":"python","experienece":18,"skills":['django','express'],"location":'trichy'}},{insertOne:{"expertName":'Karthiya banu',"technology":"data structures","experienece":20,"skills":['java','python'],"location":'chennai'}}])
