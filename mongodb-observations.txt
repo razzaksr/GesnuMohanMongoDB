@@ -76,3 +76,428 @@ insertMany([{json},{json},{json}])
 bulkWrite([{insertOne:{json}},{insertOne:{json}}])
 
 Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.bulkWrite([{insertOne:{"expertName":'Maheshwaran',"technology":"python","experienece":18,"skills":['django','express'],"location":'trichy'}},{insertOne:{"expertName":'Karthiya banu',"technology":"data structures","experienece":20,"skills":['java','python'],"location":'chennai'}}])
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"location":"salem"})
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"experience":{$gte:4}})
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({$and:[{"experience":{$gte:2}},{"experience":{$lte:9}}]}).pretty()
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({$or:[{"technology":"java"},{"experience":{$gte:5}},{"location":"chennai"}]})
+[
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29b"),
+    expertName: 'Karthiya banu',
+    technology: 'data structures',
+    experienece: 20,
+    skills: [ 'java', 'python' ],
+    location: 'chennai'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"location":{$in:["salem","namakkal"]}})
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"location":{$nin:["salem","namakkal"]}})
+[
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29a"),
+    expertName: 'Maheshwaran',
+    technology: 'python',
+    experienece: 18,
+    skills: [ 'django', 'express' ],
+    location: 'trichy'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29b"),
+    expertName: 'Karthiya banu',
+    technology: 'data structures',
+    experienece: 20,
+    skills: [ 'java', 'python' ],
+    location: 'chennai'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"expertName":/A.*/})
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({ "location": /.*m.*/ })
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  },
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find({"expertName":/A.*/}).count()
+2
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().sort({"expertName":0})
+MongoInvalidArgumentError: Invalid sort direction: 0
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().sort({"expertName":1})
+[
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  },
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29b"),
+    expertName: 'Karthiya banu',
+    technology: 'data structures',
+    experienece: 20,
+    skills: [ 'java', 'python' ],
+    location: 'chennai'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29a"),
+    expertName: 'Maheshwaran',
+    technology: 'python',
+    experienece: 18,
+    skills: [ 'django', 'express' ],
+    location: 'trichy'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().sort({"expertName":-1})
+[
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29a"),
+    expertName: 'Maheshwaran',
+    technology: 'python',
+    experienece: 18,
+    skills: [ 'django', 'express' ],
+    location: 'trichy'
+  },
+  {
+    _id: ObjectId("6310420c1b1281b079eba29b"),
+    expertName: 'Karthiya banu',
+    technology: 'data structures',
+    experienece: 20,
+    skills: [ 'java', 'python' ],
+    location: 'chennai'
+  },
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().sort({"experience":-1})
+[
+  {
+    _id: ObjectId("63103df01b1281b079eba298"),
+    expertName: 'Razak Mohamed',
+    technology: 'Java',
+    experience: 10,
+    skills: {
+      frontend: 'react',
+      backend: [ 'spring', 'django', 'flask', 'express' ]
+    },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103c121b1281b079eba297"),
+    expertName: 'Aarthi',
+    technology: 'Python',
+    experience: 3,
+    skills: { frontend: 'react', backend: 'django' },
+    location: 'sivathapuram'
+  },
+  {
+    _id: ObjectId("631039a21b1281b079eba296"),
+    expertName: 'Manoj Kumar',
+    technology: 'Java',
+    experience: 1,
+    skills: { frontend: 'material ui', backend: 'spring boot' },
+    location: 'namakkal'
+  },
