@@ -501,3 +501,229 @@ Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find().sort({"experience
     skills: { frontend: 'material ui', backend: 'spring boot' },
     location: 'namakkal'
   },
+
+
+delete one item
+db.first.deleteOne()
+db.first.remove()
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.deleteMany({"location":{$nin:['salem']}})
+{ acknowledged: true, deletedCount: 3 }
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.first.find()
+[
+  {
+    _id: ObjectId("630d9649ae8064866f0c477b"),
+    expertName: 'Annamalai',
+    technology: 'Java',
+    experience: 4,
+    skills: { frontend: 'react', backend: 'spring' },
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63103df01b1281b079eba299"),
+    expertName: 'Rasheedha',
+    technology: 'digital marketting',
+    experience: 9,
+    skills: 'SEO',
+    location: 'salem'
+  }
+]
+
+new database:
+use new-database-name
+
+new collection:
+db.collection-name.insertOne({})
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.insertOne({"brand":"realme","features":['dolby vision','dolby aAtlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.insertOne({"brand":"realme","features":['dolby vision','dolby atmos'],"model":"7s","price":12500,"ram":8,"internal":64})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6316d9923649220b83768d27")
+}
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find()
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.insertMany([{"brand":"vivo","features":['fhd','gorilla','dolby vision'],"model":'v20',"ram":4,"internal":64,"price":8700},{"brand":"oppo","model":'8s',"price":15000,"features":['gaming','pop up camera'],"ram":6,"internal":128},{"brand":"poco","model":'c3',"price":8000,"features":['gaming','dolby atmos'],"internal":64,"ram":6},{"brand":"iqoo","model":'z3',"price":19800,"features":['5g','gaming'],"internal":128,"ram":8}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6316db933649220b83768d28"),
+    '1': ObjectId("6316db933649220b83768d29"),
+    '2': ObjectId("6316db933649220b83768d2a"),
+    '3': ObjectId("6316db933649220b83768d2b")
+  }
+}
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find()
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d28"),
+    brand: 'vivo',
+    features: [ 'fhd', 'gorilla', 'dolby vision' ],
+    model: 'v20',
+    ram: 4,
+    internal: 64,
+    price: 8700
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d29"),
+    brand: 'oppo',
+    model: '8s',
+    price: 15000,
+    features: [ 'gaming', 'pop up camera' ],
+    ram: 6,
+    internal: 128
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2a"),
+    brand: 'poco',
+    model: 'c3',
+    price: 8000,
+    features: [ 'gaming', 'dolby atmos' ],
+    internal: 64,
+    ram: 6
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2b"),
+    brand: 'iqoo',
+    model: 'z3',
+    price: 19800,
+    features: [ '5g', 'gaming' ],
+    internal: 128,
+    ram: 8
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.update({"model":"8s"},{$set:{"ram":8}})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find()
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d28"),
+    brand: 'vivo',
+    features: [ 'fhd', 'gorilla', 'dolby vision' ],
+    model: 'v20',
+    ram: 4,
+    internal: 64,
+    price: 8700
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d29"),
+    brand: 'oppo',
+    model: '8s',
+    price: 15000,
+    features: [ 'gaming', 'pop up camera' ],
+    ram: 8,
+    internal: 128
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2a"),
+    brand: 'poco',
+    model: 'c3',
+    price: 8000,
+    features: [ 'gaming', 'dolby atmos' ],
+    internal: 64,
+    ram: 6
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2b"),
+    brand: 'iqoo',
+    model: 'z3',
+    price: 19800,
+    features: [ '5g', 'gaming' ],
+    internal: 128,
+    ram: 8
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.updateOne({"internal":128,"brand":"iqoo"},{$set:{"price":15500}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find()
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d28"),
+    brand: 'vivo',
+    features: [ 'fhd', 'gorilla', 'dolby vision' ],
+    model: 'v20',
+    ram: 4,
+    internal: 64,
+    price: 8700
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d29"),
+    brand: 'oppo',
+    model: '8s',
+    price: 15000,
+    features: [ 'gaming', 'pop up camera' ],
+    ram: 8,
+    internal: 128
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2a"),
+    brand: 'poco',
+    model: 'c3',
+    price: 8000,
+    features: [ 'gaming', 'dolby atmos' ],
+    internal: 64,
+    ram: 6
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2b"),
+    brand: 'iqoo',
+    model: 'z3',
+    price: 15500,
+    features: [ '5g', 'gaming' ],
+    internal: 128,
+    ram: 8
+  }
+]
