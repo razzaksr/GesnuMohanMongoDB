@@ -727,3 +727,182 @@ Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find()
     ram: 8
   }
 ]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find({"features":{$in:['dolby atmos']}})
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2a"),
+    brand: 'poco',
+    model: 'c3',
+    price: 8000,
+    features: [ 'gaming', 'dolby atmos' ],
+    internal: 64,
+    ram: 6
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find({"features":{$in:['dolby vision']}})
+[
+  {
+    _id: ObjectId("6316d9923649220b83768d27"),
+    brand: 'realme',
+    features: [ 'dolby vision', 'dolby atmos' ],
+    model: '7s',
+    price: 12500,
+    ram: 8,
+    internal: 64
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d28"),
+    brand: 'vivo',
+    features: [ 'fhd', 'gorilla', 'dolby vision' ],
+    model: 'v20',
+    ram: 4,
+    internal: 64,
+    price: 8700
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.mobile.find({"features":{$elemMatch:{$in:['game','gaming']}}})
+[
+  {
+    _id: ObjectId("6316db933649220b83768d2b"),
+    brand: 'iqoo',
+    model: 'z3',
+    price: 15500,
+    features: [ '5g', 'gaming' ],
+    internal: 128,
+    ram: 8
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d2a"),
+    brand: 'poco',
+    model: 'c3',
+    price: 8000,
+    features: [ 'gaming', 'dolby atmos' ],
+    internal: 64,
+    ram: 6
+  },
+  {
+    _id: ObjectId("6316db933649220b83768d29"),
+    brand: 'oppo',
+    model: '8s',
+    price: 15000,
+    features: [ 'gaming', 'pop up camera' ],
+    ram: 8,
+    internal: 128
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.students.insertMany([{"name":"Mohan","exp":2,"ctc":1.4},{"name":"gesnu","skill":'python',"location":"salem"},{"name":"priya","exp":1,"location":"salem"},{"name":"annamalai","exp":4,"ctc":2.5}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("63182bd97841a0bfa9fdacd9"),
+    '1': ObjectId("63182bd97841a0bfa9fdacda"),
+    '2': ObjectId("63182bd97841a0bfa9fdacdb"),
+    '3': ObjectId("63182bd97841a0bfa9fdacdc")
+  }
+}
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.students.find({"exp":{$exists:true}})
+[
+  {
+    _id: ObjectId("63182bd97841a0bfa9fdacd9"),
+    name: 'Mohan',
+    exp: 2,
+    ctc: 1.4
+  },
+  {
+    _id: ObjectId("63182bd97841a0bfa9fdacdb"),
+    name: 'priya',
+    exp: 1,
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63182bd97841a0bfa9fdacdc"),
+    name: 'annamalai',
+    exp: 4,
+    ctc: 2.5
+  }
+]
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.students.find({"location":{$exists:true}})
+[
+  {
+    _id: ObjectId("63182bd97841a0bfa9fdacda"),
+    name: 'gesnu',
+    skill: 'python',
+    location: 'salem'
+  },
+  {
+    _id: ObjectId("63182bd97841a0bfa9fdacdb"),
+    name: 'priya',
+    exp: 1,
+    location: 'salem'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.insertMany([{"org":"relaiance industries","keyperson":"mukesh ambani","nature":"petrolium"},{"org":"adani groups","keyperson":"gowtham adani","nature":"gas"},{"org":"jet airways industries","keyperson":"paresh gosawmy","nature":"transport"},{"org":"allon solly","keyperson":"aditya birla groups","nature":"garments"}])
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.createIndex({"org":"text","keyperson":"text","nature":"text"})
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.updateOne({"org":"allon solly"},{$set:{"nature":"garments industries"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.find({$text:{$search:"industries"}})
+[
+  {
+    _id: ObjectId("631831097841a0bfa9fdace0"),
+    org: 'allon solly',
+    keyperson: 'aditya birla groups',
+    nature: 'garments industries'
+  },
+  {
+    _id: ObjectId("631831097841a0bfa9fdacdd"),
+    org: 'relaiance industries',
+    keyperson: 'mukesh ambani',
+    nature: 'petrolium'
+  },
+  {
+    _id: ObjectId("631831097841a0bfa9fdacdf"),
+    org: 'jet airways industries',
+    keyperson: 'paresh gosawmy',
+    nature: 'transport'
+  }
+]
+
+Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.find({$text:{$search:"industries"}},{score:{$meta:'textScore'}})
+[
+  {
+    _id: ObjectId("631831097841a0bfa9fdacdf"),
+    org: 'jet airways industries',
+    keyperson: 'paresh gosawmy',
+    nature: 'transport',
+    score: 0.6666666666666666
+  },
+  {
+    _id: ObjectId("631831097841a0bfa9fdacdd"),
+    org: 'relaiance industries',
+    keyperson: 'mukesh ambani',
+    nature: 'petrolium',
+    score: 0.75
+  },
+  {
+    _id: ObjectId("631831097841a0bfa9fdace0"),
+    org: 'allon solly',
+    keyperson: 'aditya birla groups',
+    nature: 'garments industries',
+    score: 0.75
+  }
+]
