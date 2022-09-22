@@ -906,3 +906,6 @@ Atlas atlas-hp69qc-shard-0 [primary] forenoon> db.corporates.find({$text:{$searc
     score: 0.75
   }
 ]
+
+
+db.mobile.deleteMany({"letsChat":{$exists:true}})
